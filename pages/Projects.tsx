@@ -26,7 +26,7 @@ export default function Project() {
                 </h2>
             </div>
         </div>
-        <div className="projectCardGrid">
+        <div className={styles.projectCardGrid}>
         <CCard
          progressState="In Progress"
          title="art-walk"
@@ -40,7 +40,7 @@ export default function Project() {
     )
 }
 
-function CCard({progressState, title}) {
+function CCard({ progressState, title }) {
 
     let stateColor = ""
     if (progressState === "In Progress") {
@@ -50,7 +50,7 @@ function CCard({progressState, title}) {
     }
 
     return (
-        <Card shadow="sm" padding="lg" radius="md" withBorder>
+        <Card className={styles.projectCard} shadow="sm" padding="lg" radius="md" withBorder>
             <Group position="apart" mt="xs">
             <Badge color={stateColor} variant="light">
           {progressState}
@@ -77,7 +77,7 @@ function CCard({progressState, title}) {
       </Group>
       <Group position="apart" mt="md" mb="xs">
             <Text fz="xl"> Project description</Text>
-            <Card.Section mr="md">
+            <Card.Section mr="xl" ml="xl">
                 <Image width={175} height={175} src={timage123} alt="n/a"/>
             </Card.Section>
         </Group>
