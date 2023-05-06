@@ -2,8 +2,8 @@ import Navbar from './components/Navbar';
 import styles from '../styles/Home.module.css';
 import { ActionIcon, Badge, Card, Group, Menu, rem, Text, Title } from '@mantine/core';
 import Image from 'next/image';
-import timage123 from './images/timage123.jpeg';
 import { IconDots, IconEye, IconFileZip, IconTrash } from '@tabler/icons-react';
+import { projects } from './data/projects';
 
 export default function Project() {
 
@@ -27,20 +27,25 @@ export default function Project() {
             </div>
         </div>
         <div className={styles.projectCardGrid}>
-        <CCard
-         progressState="In Progress"
-         title="art-walk"
-         />
-        <CCard
-         progressState="Done"
-         title="spell-walker"
-         />
+       {projects.map( (item, i) => {
+           return <CCard
+                key={i}
+                progressState={item.state}
+                title={item.name}
+                image={item.image}
+                description={item.description}
+                actionsBundle={ {
+                    repositoryLink: item.actions.repositoryLink,
+                }
+                }
+           />
+       })}
         </div>
         </>
     )
 }
 
-function CCard({ progressState, title }) {
+function CCard({ progressState, title, image, description, actionsBundle }) {
 
     let stateColor = ""
     if (progressState === "In Progress") {
@@ -65,7 +70,7 @@ function CCard({ progressState, title }) {
 
             <Menu.Dropdown>
               <Menu.Item icon={<IconFileZip size={rem(14)} />}>Download zip</Menu.Item>
-              <Menu.Item icon={<IconEye size={rem(14)} />}>See code</Menu.Item>
+              <Menu.Item component="a" href={actionsBundle.repositoryLink} icon={<IconEye size={rem(14)} />}>See code</Menu.Item>
               <Menu.Item icon={<IconTrash size={rem(14)} />} color="red">
                 Delete all
               </Menu.Item>
@@ -75,10 +80,10 @@ function CCard({ progressState, title }) {
         <Group position="apart" mt="lg" mb="lg">
         <Title weight={500}>{title}</Title>
       </Group>
-      <Group position="apart" mt="md" mb="xs">
-            <Text fz="xl"> Project description</Text>
+      <Group position="center" mt="md" mb="xs">
+            <Text fz="lg"> {description} </Text>
             <Card.Section mr="xl" ml="xl">
-                <Image width={175} height={175} src={timage123} alt="n/a"/>
+                <Image width={175} height={175} src={image} alt="n/a"/>
             </Card.Section>
         </Group>
         </Card>
