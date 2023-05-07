@@ -4,27 +4,22 @@ import { ActionIcon, Badge, Card, Group, Menu, rem, Text, Title } from '@mantine
 import Image from 'next/image';
 import { IconDots, IconEye, IconFileZip, IconTrash } from '@tabler/icons-react';
 import { projects } from './data/projects';
+import TimelineBranch from './components/TimelineBranch';
 
 export default function Project() {
 
     return (
         <>
         <Navbar/>
-        <div className={styles.activeProjectsDisplay}>
-            <h1>
-                Active Projects
-            </h1>
-            <div className="activeProjectsList">
-                <h2>
-                    art-walk
-                </h2>
-                <h2>
-                    LERN
-                </h2>
-                <h2>
-                    spell-walker
-                </h2>
-            </div>
+        <div className={styles.projects}>
+        <div className={styles.projectsDisplayHeader}>
+            <Title>
+                Projects
+            </Title>
+        </div>
+        <div className={styles.recentProjectActivity}>
+        <Text fz="xl"> Recent Activity </Text>
+        <TimelineBranch/>
         </div>
         <div className={styles.projectCardGrid}>
        {projects.map( (item, i) => {
@@ -40,6 +35,7 @@ export default function Project() {
                 }
            />
        })}
+        </div>
         </div>
         </>
     )
